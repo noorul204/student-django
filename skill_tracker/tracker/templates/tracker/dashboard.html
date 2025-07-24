@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'tracker/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your Dashboard</h1>
+        <p class="username">Hello, <strong>{{ user.username }}</strong>!</p>
+
+        <h2>Your Skills:</h2>
+        {% if skills %}
+            <ul class="skill-list">
+                {% for skill in skills %}
+                    <li>
+                        <strong>{{ skill.name }}</strong> — Progress: {{ skill.progress }}%
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have not added any skills yet.</p>
+        {% endif %}
+
+        <div class="actions">
+            <a href="{% url 'add_skill' %}" class="btn">➕ Add New Skill</a>
+            <a href="{% url 'logout' %}" class="btn logout">🚪 Logout</a>
+        </div>
+    </div>
+</body>
+</html>
